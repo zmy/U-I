@@ -9,11 +9,25 @@ class ProfileSim:
         self.wbProfile = pickle.load(open(wbProFilePath, 'rb'))
         self.matcher = difflib.SequenceMatcher()
 
-    def getRRProfile(self, rrID):
-        return self.rrProfile[rrID]
-    
-    def getWBProfile(self, wbID):
-        return self.wbProfile[wbID]
+    def getRRProfile(self, rrID, key='all'):
+        if key=='all':
+            return self.rrProfile[rrID]
+        else:
+            profile = self.rrProfile[rrID]
+            if key in profile:
+                return profile[key]
+            else:
+                return None
+
+    def getWBProfile(self, wbID, key='all'):
+        if key=='all':
+            return self.wbProfile[wbID]
+        else:
+            profile = self.wbProfile[wbID]
+            if key in profile:
+                return profile[key]
+            else:
+                return None
 
     def compareStr(self, strA, strB):
         self.matcher.set_seqs(strA, strB)
